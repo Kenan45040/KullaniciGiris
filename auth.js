@@ -1,4 +1,6 @@
-netlifyIdentity.init();
+netlifyIdentity.init({
+  APIUrl: 'https://kulanicigiris.netlify.app/.netlify/identity'
+});
 
 const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
