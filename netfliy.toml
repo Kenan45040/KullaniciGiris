@@ -1,2 +1,3 @@
-[functions]
-  directory = "netlify/functions"
+[identity]
+  url = "https://kulanicigiris.netlify.app"
+  passwordRecovery = "/reset.html"
