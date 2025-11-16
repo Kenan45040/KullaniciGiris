@@ -2,12 +2,38 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>Giriş Yap</title>
+  <title>Dashboard</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script defer src="auth.js"></script>
+  <script>
+    netlifyIdentity.init({
+      APIUrl: 'https://kulanicigiris.netlify.app/.netlify/identity'  // domaininle değiştir
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const user = netlifyIdentity.currentUser();
+      if (!user) {
+        // Giriş yoksa anasayfaya at
+        window.location.href = "/";
+      } else {
+        document.getElementById("user-email").textContent = user.email;
+      }
+    });
+  </script>
 </head>
 <body>
-  <h1>Güvenli Giriş Sistemi</h1>
-  <button id="login-btn">Giriş / Kayıt Ol</button>
+  <h1>Hoşgeldin, <span id="user-email"></span></h1>
+  <p>Gizli dosyaları aşağıdan indirebilirsin:</p>
+  <ul>
+    <li><a href="/ornek.pdf" download>Ornek.pdf</a></li>
+    <!-- Diğer gizli dosyalar buraya -->
+  </ul>
+  <button id="logout-btn">Çıkış Yap</button>
+
+  <script>
+    const logoutBtn = document.getElementById("logout-btn");
+    logoutBtn.addEventListener("click", () => {
+      netlifyIdentity.logout();
+    });
+  </script>
 </body>
 </html>
